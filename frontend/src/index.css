@@ -1,0 +1,201 @@
+@import 'leaflet/dist/leaflet.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html {
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-mist font-sans text-ink antialiased;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+
+  *:focus-visible {
+    outline: 3px solid #0B6B47;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-[10px] px-5 font-semibold transition-all duration-150 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100;
+  }
+
+  .btn-primary {
+    @apply bg-peeli text-ink hover:bg-peeli-dark active:bg-peeli-dark;
+  }
+
+  .btn-green {
+    @apply bg-cng text-white hover:bg-cng-dark active:bg-cng-dark;
+  }
+
+  .btn-ghost {
+    @apply border border-line bg-white text-ink hover:border-ink active:bg-mist;
+  }
+
+  .btn-danger {
+    @apply border border-signal bg-white text-signal hover:bg-signal hover:text-white active:bg-signal/90;
+  }
+
+  .field {
+    @apply min-h-[48px] w-full rounded-[10px] border border-line bg-white px-3.5 text-base text-ink placeholder:text-muted/70 transition-all duration-150 focus:border-cng focus:ring-2 focus:ring-cng/20 focus:outline-none;
+  }
+
+  .label {
+    @apply mb-1 block text-sm font-semibold text-ink;
+  }
+
+  /* Indian commercial number plate: black on yellow. Used for vehicle numbers and the ride OTP. */
+  .plate {
+    @apply inline-block rounded-md border-2 border-ink bg-peeli px-3 py-1 font-display font-bold text-ink transition-transform duration-100;
+    letter-spacing: 0.08em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-sm font-semibold;
+  }
+
+  /* Mobile safe area utilities */
+  .pb-safe {
+    padding-bottom: 8px;
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 8px);
+  }
+
+  .pt-safe {
+    padding-top: 8px;
+    padding-top: max(env(safe-area-inset-top, 0px), 8px);
+  }
+}
+
+/* Keyframes for purposeful micro-interactions */
+@keyframes enter-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes enter-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes radar-pulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+
+  70%,
+  100% {
+    transform: scale(1.75);
+    opacity: 0;
+  }
+}
+
+@keyframes micro-shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-3px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: enter-fade-up 220ms var(--ease-out-quart) both;
+  }
+
+  .animate-pop {
+    animation: enter-pop 200ms var(--ease-out-quart) both;
+  }
+
+  .animate-radar {
+    animation: radar-pulse 2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  }
+
+  .animate-shake {
+    animation: micro-shake 200ms ease-in-out;
+  }
+}
+
+/* Map markers (CSS-only: no image assets to break in the bundler) */
+.pin {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+  transition: transform 200ms var(--ease-out-quart);
+}
+
+.pin-pickup {
+  background: #0B6B47;
+}
+
+.pin-destination {
+  background: #12201A;
+  border-radius: 3px;
+}
+
+.pin-captain {
+  background: #FFC20E;
+  border-color: #12201A;
+  width: 22px;
+  height: 22px;
+}
+
+.pin-me {
+  background: #2563EB;
+}
+
+.leaflet-container {
+  font-family: Mukta, system-ui, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
