@@ -17,7 +17,9 @@ export function getSocket() {
     instance.disconnect();
   }
 
-  instance = io({
+  const socketUrl = import.meta.env.VITE_SOCKET_URL || undefined;
+
+  instance = io(socketUrl, {
     auth: { token },
     transports: [ 'websocket', 'polling' ],
   });
