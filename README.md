@@ -1,4 +1,5 @@
 # 🚖 ApnaRide — Real-Time Ride-Hailing Platform
+https://apnaride.onrender.com/
 
 ### A full-stack ride-booking system with geospatial dispatch, live GPS tracking, concurrency-safe ride management, and captain analytics.
 
@@ -495,6 +496,11 @@ These implementation choices make ApnaRide a useful project for studying real-ti
 
 - GitHub: [@bhav-1007](https://github.com/bhav-1007)
 - Project Repository: [ApnaRide](https://github.com/bhav-1007/ApnaRide)
+## 🌐 Live Demo
+
+**Try ApnaRide live:** [https://apnaride.onrender.com/](https://apnaride.onrender.com/)
+
+Explore the rider and captain workflows, ride booking experience, and real-time features through the deployed application.
 
 If you find the project useful, consider giving the repository a ⭐.
 
