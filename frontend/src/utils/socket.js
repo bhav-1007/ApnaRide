@@ -4,6 +4,14 @@ import { session } from '../services/apiClient';
 let instance = null;
 let instanceToken = null;
 
+const getSocketServerUrl = () => {
+  if (import.meta.env.VITE_SOCKET_URL) return import.meta.env.VITE_SOCKET_URL;
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL.replace(/\/api\/?$/, '');
+  }
+  return undefined;
+};
+
 /**
  * Returns a shared Socket.IO client instance for the current authenticated session.
  * Reconnects cleanly whenever the authentication token changes.
@@ -17,12 +25,10 @@ export function getSocket() {
     instance.disconnect();
   }
 
-  const socketUrl = import.meta.env.VITE_SOCKET_URL || undefined;
-
-  instance = io(socketUrl, {
-    auth: { token },
-    transports: [ 'websocket', 'polling' ],
-  });
+  const serverUrl = getSocketServerUrl();
+  instance = serverUrl
+    ? io(serverUrl, { auth: { token }, transports: [ 'websocket', 'polling' ] })
+    : io({ auth: { token }, transports: [ 'websocket', 'polling' ] });
 
   instanceToken = token;
   return instance;
