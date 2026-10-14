@@ -37,9 +37,10 @@ export default function MapView({ markers = [], route = null, focus = null, clas
   return (
     <MapContainer center={INDIA} zoom={5} className={`h-full w-full ${className}`} scrollWheelZoom>
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-        maxZoom={19}
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+        subdomains="abcd"
+        maxZoom={20}
       />
       {route && (
         <Polyline positions={route.coordinates.map(([ lng, lat ]) => [ lat, lng ])} pathOptions={{ color: '#0B6B47', weight: 5, opacity: 0.9 }} />

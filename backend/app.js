@@ -25,10 +25,11 @@ app.use(cors({
     credentials: true,
 }));
 
-// Security headers with relaxed CSP for Leaflet OpenStreetMap tiles
+// Security headers with relaxed CSP for Leaflet map tiles
 app.use(helmet({
     contentSecurityPolicy: false,
     crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: false,
 }));
 
 app.use(express.json({ limit: '10kb' }));
